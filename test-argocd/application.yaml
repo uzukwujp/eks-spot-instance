@@ -1,0 +1,28 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: test-argo
+  namespace: argocd
+  annotations:
+spec:
+  destination:
+    server: https://70ED0B65F188DF81F2BCDF0AA99F0196.gr7.us-east-1.eks.amazonaws.com
+    namespace: prod
+  project: default
+  source:
+    plugin:
+      name: kustomized-helm
+    path: test-argocd/overlays/prod
+    repoURL: "https://github.com/uzukwujp/eks-spot-instance.git"
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - Validate=true
+      - ServerSideApply=true
