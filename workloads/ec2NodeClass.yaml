@@ -1,0 +1,27 @@
+
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: test-node-class
+spec:
+  amiFamily: AL2
+  associatePublicIPAddress: true
+
+  subnetSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: "poc-cluster"
+
+  amiSelectorTerms:
+    - id: ami-03c7095f7c9fd69d3
+
+  securityGroupSelectorTerms:
+    - name: eks-cluster-sg-poc-cluster-588438671
+        
+  #role: "KarpenterNodeRole-poc-cluster"
+
+  instanceProfile: KarpenterNodeInstanceProfile-poc-cluster
+
+
+  
+
+  
