@@ -14,7 +14,7 @@ spec:
   project: default
   source:
     plugin:
-      name: kustomized-helm
+      name: plugin
     path: test-argocd/overlays/prod
     repoURL: "https://github.com/uzukwujp/eks-spot-instance.git"
     targetRevision: main
