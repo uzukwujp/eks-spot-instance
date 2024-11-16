@@ -421,7 +421,7 @@ configs:
     # -- Plugin yaml files to be added to argocd-cmp-cm
     plugins: 
       # --- First plugin
-        plugin: 
+        kustomized-helm: 
             generate:
               command: [ "sh", "-c" ]
               args: [ "kustomize build --enable-helm" ]

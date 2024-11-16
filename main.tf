@@ -10,6 +10,7 @@ module "vpc" {
 
 module "eks" {
   source               =  "./eks/control_plane"
+  cluster_version      = var.cluster_version
   cluster_name         = var.cluster_name
   cluster_role_name    = var.cluster_role_name
   private_subnet_ids   = module.vpc.private_subnet_ids

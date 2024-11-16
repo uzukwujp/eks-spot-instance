@@ -26,5 +26,6 @@ worker_node_iam_role_name  = "poc-worker-node-IAM-role"
 karpenter_version          = "1.0.0"
 chart_version              = "7.7.1"
 custom_values              = "argocd_values.yaml"
+cluster_version            = "1.31"
 
 

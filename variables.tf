@@ -82,5 +82,9 @@ variable "custom_values" {
     description = "file path to custom helm values file"  
 }
 
+variable "cluster_version" {
+  type = string  
+}
+
 
 

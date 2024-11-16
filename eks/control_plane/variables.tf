@@ -9,3 +9,7 @@ variable "private_subnet_ids" {
 variable "cluster_role_name" {
   type = string 
 }
+
+variable "cluster_version" {
+  type = string  
+}
