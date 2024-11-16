@@ -4,7 +4,7 @@ kind: EC2NodeClass
 metadata:
   name: test-node-class
 spec:
-  amiFamily: AL2
+  amiFamily: AL2023
   associatePublicIPAddress: true
 
   subnetSelectorTerms:
@@ -12,10 +12,13 @@ spec:
         karpenter.sh/discovery: "poc-cluster"
 
   amiSelectorTerms:
-    - id: ami-03c7095f7c9fd69d3
+    #- id: ami-03c7095f7c9fd69d3
+    - alias: al2023@v20241106
 
   securityGroupSelectorTerms:
-    - name: eks-cluster-sg-poc-cluster-588438671
+    #- name: eks-cluster-sg-poc-cluster-588438671
+    - tags:
+        karpenter.sh/discovery: "poc-cluster"
         
   #role: "KarpenterNodeRole-poc-cluster"
 

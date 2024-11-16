@@ -9,12 +9,12 @@ metadata:
   annotations:
 spec:
   destination:
-    server: https://70ED0B65F188DF81F2BCDF0AA99F0196.gr7.us-east-1.eks.amazonaws.com
+    server: https://C692903006C397AB09B0D5626FD80116.gr7.us-east-1.eks.amazonaws.com
     namespace: prod
   project: default
   source:
     plugin:
-      name: plugin
+      name: kustomized-helm
     path: test-argocd/overlays/prod
     repoURL: "https://github.com/uzukwujp/eks-spot-instance.git"
     targetRevision: main
