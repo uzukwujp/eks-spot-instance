@@ -1,10 +1,12 @@
 
 addons = [{
-  addon_name = "eks-pod-identity-agent"
+  addon_name    = "eks-pod-identity-agent"
+  addon_version = "v1.3.2-eksbuild.2"
   },
 
   {
-    addon_name = "aws-ebs-csi-driver"
+    addon_name    = "aws-ebs-csi-driver"
+    addon_version = "v1.36.0-eksbuild.1"
   }
 ]
 cidr_block                 = "10.0.0.0/16"

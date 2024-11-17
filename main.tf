@@ -22,6 +22,7 @@ module "worker_node" {
   node_group_name           =  var.node_group_name
   private_subnet_ids        =  module.vpc.private_subnet_ids
   desired_size              =  var.desired_size
+  kubernetes_version        =  var.cluster_version
   max_size                  =  var.max_size
   max_unavailable           =  var.max_unavailable
   min_size                  =  var.min_size
@@ -33,11 +34,12 @@ module "worker_node" {
 }
 
 module "eks_addons" {
-  source       = "./eks/eks_addons"
-  for_each     = { for idx, addon in var.addons : idx => addon }    
-  cluster_name = module.eks.cluster_name
-  addon_name   = each.value.addon_name
-  depends_on   = [ module.worker_node ]
+  source        = "./eks/eks_addons"
+  for_each      = { for idx, addon in var.addons : idx => addon }    
+  cluster_name  = module.eks.cluster_name
+  addon_name    = each.value.addon_name
+  addon_version = each.value.addon_version
+  depends_on    = [ module.worker_node ]
 }
 
 module "karpenter" {

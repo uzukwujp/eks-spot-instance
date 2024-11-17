@@ -40,3 +40,8 @@ variable "capacity_type" {
   type = string
   default = "ON_DEMAND" 
 }
+
+variable "kubernetes_version" {
+  type        = string
+  description = "The kubernetes version"  
+}

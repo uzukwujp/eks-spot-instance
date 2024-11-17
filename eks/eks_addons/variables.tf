@@ -6,3 +6,7 @@ variable "cluster_name" {
 variable "addon_name" {
   type = string
 }
+
+variable "addon_version" {
+  type = string  
+}
