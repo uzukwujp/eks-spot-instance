@@ -14,7 +14,7 @@ spec:
   project: default
   source:
     plugin:
-      name: argocd-lovely-plugin-v1.2
+      name: lovely
     path: goldilocks/overlays/prod
     repoURL: "https://github.com/uzukwujp/eks-spot-instance.git"
     targetRevision: main
