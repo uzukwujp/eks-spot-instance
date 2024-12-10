@@ -1,0 +1,52 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade,post-install,post-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    helm.sh/hook-weight: '-110'
+  labels:
+    app.kubernetes.io/component: admission-certgen
+    app.kubernetes.io/instance: goldilocks
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: vpa
+    app.kubernetes.io/version: 1.0.0
+    argocd.argoproj.io/instance: goldilock
+    helm.sh/chart: vpa-4.5.0
+  name: goldilocks-vpa-admission-certgen
+  namespace: goldilocks
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: goldilocks-vpa-admission-certgen
+subjects:
+  - kind: ServiceAccount
+    name: goldilocks-vpa-admission-certgen
+    namespace: goldilocks
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade,post-install,post-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+    helm.sh/hook-weight: '-110'
+  labels:
+    app.kubernetes.io/component: admission-certgen
+    app.kubernetes.io/instance: goldilocks
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: vpa
+    app.kubernetes.io/version: 1.0.0
+    argocd.argoproj.io/instance: goldilock
+    helm.sh/chart: vpa-4.5.0
+  name: goldilocks-vpa-admission-certgen
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: goldilocks-vpa-admission-certgen
+subjects:
+  - kind: ServiceAccount
+    name: goldilocks-vpa-admission-certgen
+    namespace: goldilocks
