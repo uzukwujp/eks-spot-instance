@@ -10,7 +10,7 @@ metadata:
 spec:
   destination:
     server: https://34FD424FAEABC035B91798E1EB396C1F.gr7.us-east-1.eks.amazonaws.com
-    namespace: goldilocks
+    namespace: argocd
   project: default
   source:
     plugin:
