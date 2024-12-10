@@ -1,0 +1,28 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: goldilock
+  namespace: argocd
+  annotations:
+spec:
+  destination:
+    server: https://34FD424FAEABC035B91798E1EB396C1F.gr7.us-east-1.eks.amazonaws.com
+    namespace: goldilocks
+  project: default
+  source:
+    plugin:
+      name: argocd-lovely-plugin-v1.2
+    path: goldilocks/overlays/prod
+    repoURL: "https://github.com/uzukwujp/eks-spot-instance.git"
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - Validate=true
+      - ServerSideApply=true
