@@ -42,14 +42,14 @@ module "eks_addons" {
   depends_on    = [ module.worker_node ]
 }
 
-module "karpenter" {
-  source                    = "./karpenter"
-  cluster_name              = var.cluster_name
-  vpc_id                    = module.vpc.vpc_id
-  karpenter_version         = var.karpenter_version
-  cluster_security_group_id = module.eks.cluster_security_group_id
-  depends_on                = [module.eks]  
-}
+# module "karpenter" {
+#   source                    = "./karpenter"
+#   cluster_name              = var.cluster_name
+#   vpc_id                    = module.vpc.vpc_id
+#   karpenter_version         = var.karpenter_version
+#   cluster_security_group_id = module.eks.cluster_security_group_id
+#   depends_on                = [module.eks]  
+# }
 
 module "argocd" {
   source        = "./argocd"

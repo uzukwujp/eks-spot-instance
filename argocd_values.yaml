@@ -421,10 +421,11 @@ configs:
     # -- Plugin yaml files to be added to argocd-cmp-cm
     plugins: 
       # --- First plugin
-        kustomized-helm: 
+        kustomized: 
             generate:
               command: [ "sh", "-c" ]
               args: [ "kustomize build --enable-helm" ]
+
 
       # --- Second plugin
       # my-plugin2:
@@ -2508,11 +2509,10 @@ repoServer:
       - mountPath: /home/argocd/cmp-server/plugins
         name: plugins
       - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-        subPath: plugin.yaml
+        subPath: kustomized.yaml
         name: argocd-cmp-cm
       - mountPath: /tmp
         name: cmp-tmp
-
 
 
   - name: lovely-plugin
