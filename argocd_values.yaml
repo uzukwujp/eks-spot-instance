@@ -2515,26 +2515,21 @@ repoServer:
 
 
 
-    # - name: cmp-my-plugin
-    #   command:
-    #     - "/var/run/argocd/argocd-cmp-server"
-    #   image: busybox
-    #   securityContext:
-    #     runAsNonRoot: true
-    #     runAsUser: 999
-    #   volumeMounts:
-    #     - mountPath: /var/run/argocd
-    #       name: var-files
-    #     - mountPath: /home/argocd/cmp-server/plugins
-    #       name: plugins
-    #     # Remove this volumeMount if you've chosen to bake the config file into the sidecar image.
-    #     - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-    #       subPath: my-plugin.yaml
-    #       name: argocd-cmp-cm
-    #     # Starting with v2.4, do NOT mount the same tmp volume as the repo-server container. The filesystem separation helps
-    #     # mitigate path traversal attacks.
-    #     - mountPath: /tmp
-    #       name: cmp-tmp
+  - name: lovely-plugin
+    image: ghcr.io/crumbhole/lovely:1.2.0
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 999
+    volumeMounts:
+      - mountPath: /var/run/argocd
+        name: var-files
+      - mountPath: /home/argocd/cmp-server/plugins
+        name: plugins
+      - mountPath: /tmp
+        name: lovely-tmp
+
+
+
     # - name: cmp-my-plugin2
     #   command:
     #     - "/var/run/argocd/argocd-cmp-server"
@@ -2570,6 +2565,10 @@ repoServer:
        name: argocd-cmp-cm
    - name: cmp-tmp
      emptyDir: {}
+
+   - name: lovely-tmp
+     emptyDir: {}
+
 
   # -- Volumes to be used in replacement of emptydir on default volumes
   existingVolumes: {}
