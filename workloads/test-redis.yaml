@@ -1,0 +1,81 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-mvp
+  namespace: mvp
+  labels:
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      volumes:
+      - name: redis-vol
+        persistentVolumeClaim:
+          claimName: redis-mvp
+      containers:
+      - name: redis-mvp
+        image: bitnami/redis:7.0.10
+        securityContext:
+          runAsUser: 0
+        volumeMounts:
+        - name: redis-vol
+          mountPath: /bitnami
+        env:
+        - name: REDIS_REPLICATION_MODE
+          value: master
+        - name: REDIS_MASTER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redis-secret
+              key: REDIS_MASTER_PASSWORD
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redis-secret
+              key: REDIS_PASSWORD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  namespace: mvp
+spec:
+  selector:
+    app: redis
+  ports:
+  - port: 6379
+    targetPort: 6379
+    protocol: TCP
+    
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-mvp
+  namespace: mvp
+spec:
+  storageClassName: gp2
+  resources:
+    requests:
+      storage: 500Mi
+  accessModes:
+  - ReadWriteOnce
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: redis-secret
+  namespace: mvp
+data:
+  REDIS_MASTER_PASSWORD: bWFzdGVyMTIzIQ==
+  REDIS_PASSWORD: bWFzdGVyMTIzIQ==
+
+

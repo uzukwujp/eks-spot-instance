@@ -86,6 +86,11 @@ variable "cluster_version" {
   type = string  
 }
 
+variable "repository_names" {
+   type = list(map(string))
+   description = "names of private ecr repository names"  
+}
+
 
 
 

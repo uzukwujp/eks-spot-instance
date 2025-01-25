@@ -5,6 +5,7 @@ resource "aws_eks_node_group" "example" {
   node_group_name = var.node_group_name
   node_role_arn   = aws_iam_role.example.arn
   version         = var.kubernetes_version
+  ami_type        = "AL2_x86_64"
   subnet_ids      = var.private_subnet_ids
   labels = {
      Environment: "tooling"

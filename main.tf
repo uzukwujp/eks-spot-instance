@@ -8,6 +8,12 @@ module "vpc" {
   cluster_name         = var.cluster_name
 }
 
+module "ecr" {
+  source               = "./ecr"
+  for_each             = { for idx, repo_name in var.repository_names : idx => repo_name }
+  repository_names     = each.value.repo_name
+}
+
 module "eks" {
   source               =  "./eks/control_plane"
   cluster_version      = var.cluster_version
